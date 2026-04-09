@@ -2,6 +2,11 @@
 
 `pob-headless-runtime-mcp-demo` is a local MCP server for `pob-headless-runtime`.
 
+It now runs both:
+
+- the original stdio MCP transport
+- an HTTP MCP endpoint at `/mcp`
+
 It now uses a persistent PoB worker session, so MCP tools can:
 
 - load a build once
@@ -63,6 +68,28 @@ Expected output:
 - `build/scripts/testWorker.js`
 
 The build script clears old `build/` output first so refactors do not leave stale files behind.
+
+## HTTP Port
+
+The server starts an HTTP MCP endpoint by default:
+
+- host: `127.0.0.1`
+- port: `3386`
+- path: `/mcp`
+
+Environment overrides:
+
+- `MCP_HTTP_HOST`
+- `MCP_HTTP_PORT`
+- `MCP_HTTP_PATH`
+
+Example:
+
+```powershell
+$env:MCP_HTTP_HOST = "0.0.0.0"
+$env:MCP_HTTP_PORT = "3000"
+npm run start
+```
 
 ## Included MCP Tools
 
