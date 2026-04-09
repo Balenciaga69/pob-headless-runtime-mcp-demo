@@ -27,6 +27,15 @@ export async function getCurrentDisplayStats() {
   return getPersistentPobWorker().send(createWorkerRequest("get_display_stats", {}));
 }
 
+export async function previewCurrentItemDisplayStats(itemText: string, slot?: string) {
+  return getPersistentPobWorker().send(
+    createWorkerRequest("preview_item_display_stats", {
+      item_text: itemText,
+      ...(slot ? { slot } : {}),
+    }),
+  );
+}
+
 export async function listCurrentEquipment() {
   return getPersistentPobWorker().send(createWorkerRequest("list_equipment", {}));
 }

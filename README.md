@@ -106,6 +106,7 @@ Build tools:
 - `summarize_build`
 - `get_stats`
 - `get_display_stats`
+- `preview_item_display_stats`
 - `list_equipment`
 - `list_items`
 - `list_skills`
@@ -134,9 +135,10 @@ Recommended order:
 4. call `summarize_build`
 5. call `get_stats`
 6. call `get_display_stats`
-7. call `list_skills`
-8. call `get_selected_skill`
-9. call `list_items`
+7. call `preview_item_display_stats`
+8. call `list_skills`
+9. call `get_selected_skill`
+10. call `list_items`
 
 Example `hello_world` input:
 
@@ -178,6 +180,15 @@ Example `select_skill` input:
   "group": 0,
   "skill": 0,
   "part": 0
+}
+```
+
+Example `preview_item_display_stats` input:
+
+```json
+{
+  "item_text": "Rarity: Rare\n...",
+  "slot": "Ring 1"
 }
 ```
 

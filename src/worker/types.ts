@@ -3,6 +3,7 @@ export type PobWorkerMethod =
   | "get_summary"
   | "get_stats"
   | "get_display_stats"
+  | "preview_item_display_stats"
   | "list_equipment"
   | "list_items"
   | "list_skills"

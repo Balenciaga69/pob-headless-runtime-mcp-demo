@@ -23,4 +23,8 @@ test("registerDemoTools exposes the stable skill and item tools", () => {
     "expected get_selected_skill tool",
   );
   assert.ok(registeredTools.includes("select_skill"), "expected select_skill tool");
+  assert.ok(
+    registeredTools.includes("preview_item_display_stats"),
+    "expected preview_item_display_stats tool",
+  );
 });
