@@ -2,6 +2,11 @@
 
 `pob-headless-runtime-mcp-demo` is a local MCP server for `pob-headless-runtime`.
 
+It now runs both:
+
+- the original stdio MCP transport
+- an HTTP MCP endpoint at `/mcp`
+
 It now uses a persistent PoB worker session, so MCP tools can:
 
 - load a build once
@@ -43,6 +48,7 @@ Current tool grouping:
 - `tools/build/readTools.ts`: summary and read-only queries
 - `tools/build/configTools.ts`: config mutation
 - `tools/build/equipmentTools.ts`: item equip actions
+- `tools/build/skillTools.ts`: active skill selection
 - `tools/build/saveTools.ts`: build export actions
 
 ## Install
@@ -64,6 +70,28 @@ Expected output:
 
 The build script clears old `build/` output first so refactors do not leave stale files behind.
 
+## HTTP Port
+
+The server starts an HTTP MCP endpoint by default:
+
+- host: `127.0.0.1`
+- port: `3386`
+- path: `/mcp`
+
+Environment overrides:
+
+- `MCP_HTTP_HOST`
+- `MCP_HTTP_PORT`
+- `MCP_HTTP_PATH`
+
+Example:
+
+```powershell
+$env:MCP_HTTP_HOST = "0.0.0.0"
+$env:MCP_HTTP_PORT = "3000"
+npm run start
+```
+
 ## Included MCP Tools
 
 Runtime tools:
@@ -79,7 +107,11 @@ Build tools:
 - `get_stats`
 - `get_display_stats`
 - `list_equipment`
+- `list_items`
+- `list_skills`
+- `get_selected_skill`
 - `equip_item`
+- `select_skill`
 - `get_config`
 - `set_config`
 - `save_build_code`
@@ -102,6 +134,9 @@ Recommended order:
 4. call `summarize_build`
 5. call `get_stats`
 6. call `get_display_stats`
+7. call `list_skills`
+8. call `get_selected_skill`
+9. call `list_items`
 
 Example `hello_world` input:
 
@@ -133,6 +168,16 @@ Example `get_stats` input:
 ```json
 {
   "fields": ["TotalDPS", "Life", "EnergyShield"]
+}
+```
+
+Example `select_skill` input:
+
+```json
+{
+  "group": 0,
+  "skill": 0,
+  "part": 0
 }
 ```
 

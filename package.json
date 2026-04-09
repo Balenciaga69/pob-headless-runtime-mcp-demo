@@ -8,7 +8,7 @@
     "build": "powershell -NoProfile -Command \"if (Test-Path build) { Remove-Item -Recurse -Force build }; tsc\"",
     "start": "node build/index.js",
     "test:worker": "node build/scripts/testWorker.js",
-    "test:unit": "powershell -NoProfile -Command \"$testFiles = Get-ChildItem -Recurse tests -Filter *.test.ts -ErrorAction SilentlyContinue; if (-not $testFiles) { Write-Host 'No unit tests found.'; exit 0 }; if (Test-Path build-tests) { Remove-Item -Recurse -Force build-tests }; tsc -p tsconfig.test.json; node --test build-tests/tests\"",
+    "test:unit": "powershell -NoProfile -Command \"$testFiles = Get-ChildItem -Recurse tests -Filter *.test.ts -ErrorAction SilentlyContinue; if (-not $testFiles) { Write-Host 'No unit tests found.'; exit 0 }; if (Test-Path build-tests) { Remove-Item -Recurse -Force build-tests }; tsc -p tsconfig.test.json; $compiledTests = Get-ChildItem -Recurse build-tests/tests -Filter *.js | ForEach-Object { $_.FullName }; node --test $compiledTests\"",
     "inspect": "npx @modelcontextprotocol/inspector node build/index.js"
   },
   "keywords": [

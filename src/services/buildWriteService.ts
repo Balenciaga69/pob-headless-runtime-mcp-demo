@@ -35,6 +35,21 @@ export async function equipCurrentItem(itemText: string, slot?: string) {
   );
 }
 
+export async function selectCurrentSkill(params: {
+  group?: number;
+  mainSocketGroup?: number;
+  skill?: number;
+  mainActiveSkill?: number;
+  part?: number;
+  skillPart?: number;
+}) {
+  return getPersistentPobWorker().send(
+    createWorkerRequest("select_skill", {
+      ...params,
+    }),
+  );
+}
+
 export async function saveCurrentBuildCode() {
   return getPersistentPobWorker().send(createWorkerRequest("save_build_code", {}));
 }
