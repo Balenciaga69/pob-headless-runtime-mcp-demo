@@ -48,6 +48,7 @@ Current tool grouping:
 - `tools/build/readTools.ts`: summary and read-only queries
 - `tools/build/configTools.ts`: config mutation
 - `tools/build/equipmentTools.ts`: item equip actions
+- `tools/build/skillTools.ts`: active skill selection
 - `tools/build/saveTools.ts`: build export actions
 
 ## Install
@@ -106,7 +107,11 @@ Build tools:
 - `get_stats`
 - `get_display_stats`
 - `list_equipment`
+- `list_items`
+- `list_skills`
+- `get_selected_skill`
 - `equip_item`
+- `select_skill`
 - `get_config`
 - `set_config`
 - `save_build_code`
@@ -129,6 +134,9 @@ Recommended order:
 4. call `summarize_build`
 5. call `get_stats`
 6. call `get_display_stats`
+7. call `list_skills`
+8. call `get_selected_skill`
+9. call `list_items`
 
 Example `hello_world` input:
 
@@ -160,6 +168,16 @@ Example `get_stats` input:
 ```json
 {
   "fields": ["TotalDPS", "Life", "EnergyShield"]
+}
+```
+
+Example `select_skill` input:
+
+```json
+{
+  "group": 0,
+  "skill": 0,
+  "part": 0
 }
 ```
 
