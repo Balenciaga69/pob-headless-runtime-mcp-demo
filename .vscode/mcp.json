@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "pob-headless-mcp-demo": {
+      "command": "node",
+      "args": ["${workspaceFolder}/build/index.js"]
+    }
+  }
+}

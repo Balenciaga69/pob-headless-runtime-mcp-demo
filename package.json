@@ -1,0 +1,28 @@
+{
+  "name": "pob-headless-runtime-mcp-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal MCP demo server for pob-headless-runtime",
+  "scripts": {
+    "build": "powershell -NoProfile -Command \"if (Test-Path build) { Remove-Item -Recurse -Force build }; tsc\"",
+    "start": "node build/index.js",
+    "test:worker": "node build/scripts/testWorker.js",
+    "test:unit": "powershell -NoProfile -Command \"$testFiles = Get-ChildItem -Recurse tests -Filter *.test.ts -ErrorAction SilentlyContinue; if (-not $testFiles) { Write-Host 'No unit tests found.'; exit 0 }; if (Test-Path build-tests) { Remove-Item -Recurse -Force build-tests }; tsc -p tsconfig.test.json; node --test build-tests/tests\"",
+    "inspect": "npx @modelcontextprotocol/inspector node build/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "path-of-building",
+    "pob-headless-runtime"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2"
+  }
+}
